@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Motors S.A.S. | Personalización Automotriz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --rojo: #d32f2f;
+            --rojo-claro: #ef5350;
+            --rojo-oscuro: #b71c1c;
+            --blanco: #ffffff;
+            --blanco-gris: #f5f5f5;
+            --negro: #1a1a1a;
+            --negro-claro: #2a2a2a;
+            --negro-medio: #333333;
+            --gris-texto: #666666;
+            --sombra: 0 10px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--blanco);
+            color: var(--negro);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 2px solid var(--rojo);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--blanco);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo span {
+            color: var(--rojo);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--blanco);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a::after {
+            color: var(--rojo);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--rojo);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            color: var(--blanco);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(26, 26, 26, 0.8), rgba(26, 26, 26, 0.8)),
+                url('carro1.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--blanco);
+            padding: 0 5%;
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .hero h1 span {
+            color: var(--rojo);
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            margin-bottom: 2rem;
+            color: var(--blanco-gris);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--rojo);
+            color: var(--blanco);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 50px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            margin: 0 0.5rem;
+        }
+
+        .btn:hover {
+            background: var(--rojo-oscuro);
+            transform: translateY(-3px);
+            box-shadow: var(--sombra);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--blanco);
+        }
+
+        .btn-outline:hover {
+            background: var(--blanco);
+            color: var(--negro);
+        }
+
+        /* Section Header */
+        .section-header {
+            text-align: center;
+            padding: 5rem 5% 2rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--rojo);
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--gris-texto);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Mision Vision */
+        .mv-section {
+            padding: 4rem 5%;
+            background: var(--blanco-gris);
+        }
+
+        .mv-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .mv-card {
+            background: var(--blanco);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: var(--sombra);
+            border-left: 5px solid var(--rojo);
+            transition: transform 0.3s;
+        }
+
+        .mv-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .mv-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--negro);
+        }
+
+        .mv-card h3 span {
+            color: var(--rojo);
+        }
+
+        .mv-card p {
+            color: var(--gris-texto);
+            font-size: 1rem;
+        }
+
+        /* Objetivo */
+        .objetivo-section {
+            padding: 5rem 5%;
+            background: var(--blanco);
+        }
+
+        .objetivo-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--negro);
+            color: var(--blanco);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: var(--sombra);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .objetivo-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 10px;
+            height: 100%;
+            background: var(--rojo);
+        }
+
+        .objetivo-container h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--rojo);
+        }
+
+        .objetivo-container p {
+            color: var(--blanco-gris);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .objetivo-container h3 {
+            font-size: 1.3rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: var(--rojo-claro);
+        }
+
+        .objetivo-container ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .objetivo-container li {
+            color: var(--blanco-gris);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Valores */
+        .valores-section {
+            padding: 5rem 5%;
+            background: var(--blanco-gris);
+        }
+
+        .valores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .valor-card {
+            background: var(--blanco);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            border: 1px solid rgba(211, 47, 47, 0.2);
+        }
+
+        .valor-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--sombra);
+            border-color: var(--rojo);
+        }
+
+        .valor-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--negro);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .valor-card p {
+            font-size: 0.9rem;
+            color: var(--gris-texto);
+        }
+
+        /* Ciudades */
+        .ciudades-section {
+            padding: 5rem 5%;
+            background: var(--blanco);
+        }
+
+        .ciudades-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .ciudad-card {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 250px;
+            box-shadow: var(--sombra);
+        }
+
+        .ciudad-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .ciudad-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .ciudad-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(rgba(26, 26, 26, 0.8), rgba(183, 28, 28, 0.6));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--blanco);
+            text-align: center;
+            padding: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .ciudad-card:hover .ciudad-overlay {
+            opacity: 1;
+        }
+
+        .ciudad-overlay h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Contacto */
+        .contacto-section {
+            padding: 5rem 5%;
+            background: var(--negro);
+            color: var(--blanco);
+        }
+
+        .contacto-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .contacto-info h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--rojo);
+        }
+
+        .contacto-info p {
+            color: var(--blanco-gris);
+            margin-bottom: 1.5rem;
+        }
+
+        .contacto-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .contacto-item svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--rojo);
+        }
+
+        .form-contacto {
+            background: var(--negro-claro);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--sombra);
+            border: 1px solid var(--negro-medio);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--blanco-gris);
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: var(--negro-medio);
+            border: 1px solid var(--negro-medio);
+            color: var(--blanco);
+            border-radius: 8px;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--rojo);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--negro);
+            color: var(--blanco);
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 2px solid var(--rojo);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: left;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--rojo);
+            text-transform: uppercase;
+        }
+
+        .footer-brand p {
+            color: var(--blanco-gris);
+            font-size: 0.9rem;
+        }
+
+        .footer-links h4 {
+            color: var(--rojo);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            font-size: 1rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: var(--blanco-gris);
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--rojo);
+        }
+
+        .footer-bottom {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--negro-medio);
+            color: var(--blanco-gris);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--negro);
+                flex-direction: column;
+                padding: 1rem 5%;
+                border-top: 1px solid var(--negro-medio);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                padding: 0.8rem 0;
+            }
+
+            .section-header {
+                padding: 4rem 5% 1.5rem;
+            }
+
+            .hero {
+                padding: 0 5%;
+                height: 90vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Elite <span>Motors</span></div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#mision-vision">Misión y Visión</a></li>
+                <li><a href="#objetivo">Objetivo</a></li>
+                <li><a href="#valores">Valores</a></li>
+                <li><a href="#ciudades">Ciudades</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">&#9776;</div>
+        </nav>
+    </header>
+
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>Elite <span>Motors</span></h1>
+            <p>Personalización automotriz exclusiva, innovadora y de alta calidad en Colombia</p>
+            <a href="#contacto" class="btn">Contáctanos</a>
+            <a href="#mision-vision" class="btn btn-outline">Conócenos</a>
+        </div>
+    </section>
+
+    <section class="mv-section" id="mision-vision">
+        <div class="section-header">
+            <h2>Misión y Visión</h2>
+            <p>Conoce los pilares que guían nuestra empresa</p>
+        </div>
+        <div class="mv-grid">
+            <div class="mv-card">
+                <h3>Nuestra <span>Misión</span></h3>
+                <p>Brindar servicios integrales de personalización automotriz que combinen diseño, innovación tecnológica, funcionalidad y calidad, transformando cada vehículo en una expresión auténtica de la identidad, los gustos y las necesidades de su propietario. A través de asesoramiento especializado, atención personalizada, materiales cuidadosamente seleccionados y procesos responsables, buscamos superar las expectativas de nuestros clientes, construir relaciones de confianza y promover una cultura empresarial comprometida con la excelencia, la innovación y la sostenibilidad.</p>
+            </div>
+            <div class="mv-card">
+                <h3>Nuestra <span>Visión</span></h3>
+                <p>Consolidarnos como una de las empresas líderes y referentes de la personalización automotriz en Colombia, reconocida por sus altos estándares de calidad, exclusividad, innovación y excelencia en el servicio al cliente. Aspiramos a construir una marca sólida y competitiva, capaz de destacar por la capacidad de transformar vehículos en proyectos únicos, establecer relaciones comerciales duraderas y ofrecer soluciones que respondan a las nuevas tendencias del mercado. A largo plazo, proyectamos expandir nuestra presencia hacia las principales ciudades del país y explorar oportunidades de crecimiento internacional, manteniendo un compromiso permanente con la responsabilidad social, la protección ambiental y la mejora continua.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="objetivo-section" id="objetivo">
+        <div class="section-header">
+            <h2>Objetivo General</h2>
+            <p>El rumbo de Elite Motors S.A.S.</p>
+        </div>
+        <div class="objetivo-container">
+            <h2>Objetivo General</h2>
+            <p>Consolidar a Elite Motors S.A.S. como una empresa referente a nivel nacional en el sector de la personalización automotriz, mediante la prestación de servicios innovadores, exclusivos y de alta calidad, que respondan a las necesidades, expectativas y preferencias particulares de cada cliente, integrando la sostenibilidad, la responsabilidad socioambiental y la mejora continua como pilares fundamentales de su desarrollo y posicionamiento empresarial.</p>
+
+            <h3>Objetivos Específicos</h3>
+            <ul>
+                <li>Identificar las necesidades, preferencias y expectativas de los clientes potenciales mediante estudios de mercado que permitan conocer las tendencias y oportunidades del sector de la personalización automotriz.</li>
+                <li>Diseñar un portafolio integral de servicios de personalización automotriz que combine innovación, estética, tecnología y funcionalidad, adaptándose a los gustos y requerimientos de cada cliente.</li>
+                <li>Implementar procesos de atención y asesoría personalizada que garanticen una comunicación cercana con los clientes, facilitando la elección de servicios y fortaleciendo su confianza y satisfacción.</li>
+                <li>Incorporar prácticas sostenibles en los procesos empresariales mediante el uso responsable de materiales, la reducción de residuos y el aprovechamiento eficiente de los recursos naturales y energéticos.</li>
+                <li>Garantizar la calidad y seguridad de los servicios ofrecidos mediante la selección de materiales adecuados, personal capacitado y procedimientos que cumplan con las normas técnicas y legales correspondientes.</li>
+                <li>Desarrollar estrategias de comunicación, publicidad y posicionamiento de marca que permitan dar a conocer a Elite Motors S.A.S. y fortalecer progresivamente su reconocimiento en el mercado nacional.</li>
+                <li>Establecer una estructura administrativa, organizacional y financiera que favorezca la rentabilidad, el crecimiento responsable y la sostenibilidad económica de la empresa a largo plazo.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="valores-section" id="valores">
+        <div class="section-header">
+            <h2>Valores Corporativos</h2>
+            <p>Principios que orientan nuestras decisiones y relaciones</p>
+        </div>
+        <div class="valores-grid">
+            <div class="valor-card">
+                <h4>Calidad</h4>
+                <p>Servicios y productos que respondan a altos estándares de calidad, priorizando materiales y precisión.</p>
+            </div>
+            <div class="valor-card">
+                <h4>Innovación</h4>
+                <p>Búsqueda constante de nuevas ideas, tecnologías y tendencias automotrices.</p>
+            </div>
+            <div class="valor-card">
+                <h4>Compromiso</h4>
+                <p>Responsabilidad y dedicación en cada proyecto, cumpliendo acuerdos con transparencia.</p>
+            </div>
+            <div class="valor-card">
+                <h4>Personalización</h4>
+                <p>Soluciones individuales que convierten cada vehículo en una expresión de su propietario.</p>
+            </div>
+            <div class="valor-card">
+                <h4>Confianza</h4>
+                <p>Relaciones comerciales transparentes basadas en honestidad y comunicación.</p>
+            </div>
+            <div class="valor-card">
+                <h4>Pasión</h4>
+                <p>Creatividad, dedicación y conocimiento reflejados en cada detalle.</p>
+            </div>
+            <div class="valor-card">
+                <h4>Responsabilidad</h4>
+                <p>Ética y profesionalismo reconociendo las consecuencias de nuestras decisiones.</p>
+            </div>
+            <div class="valor-card">
+                <h4>Desarrollo Consciente</h4>
+                <p>Crecimiento responsable equilibrando innovación, calidad y responsabilidad socioambiental.</p>
+            </div>
+            <div class="valor-card">
+                <h4>Excelencia</h4>
+                <p>Cultura de mejora continua para superar nuestros propios estándares.</p>
+            </div>
+            <div class="valor-card">
+                <h4>Equidad</h4>
+                <p>Trato justo y respetuoso con acceso transparente a nuestros servicios.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="ciudades-section" id="ciudades">
+        <div class="section-header">
+            <h2>Nuestra Presencia</h2>
+            <p>Elite Motors tiene presencia en tres ciudades principales de Colombia</p>
+        </div>
+        <div class="ciudades-grid">
+            <div class="ciudad-card">
+                <img src="carro 3.jpg" alt="Bogotá">
+                <div class="ciudad-overlay">
+                    <h3>Bogotá</h3>
+                    <p>Sede Principal</p>
+                </div>
+            </div>
+            <div class="ciudad-card">
+                <img src="carro 4.jpg" alt="Medellín">
+                <div class="ciudad-overlay">
+                    <h3>Medellín</h3>
+                    <p>Sede Regional</p>
+                </div>
+            </div>
+            <div class="ciudad-card">
+                <img src="carro 5.jpg" alt="Cali">
+                <div class="ciudad-overlay">
+                    <h3>Cali</h3>
+                    <p>Sede Regional</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contacto-section" id="contacto">
+        <div class="contacto-container">
+            <div class="contacto-info">
+                <h2>Contáctanos</h2>
+                <p>Transforma tu vehículo con Elite Motors S.A.S. Solicita una asesoría personalizada.</p>
+                <div class="contacto-item">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM12 11.5A1.5 1.5 0 0 1 10.5 10a1.5 1.5 0 0 1 0-3A1.5 1.5 0 0 1 12 7a1.5 1.5 0 0 1 1.5 1.5A1.5 1.5 0 0 1 12 11.5zM12 17a5 5 0 0 0 5-5v-2a7 7 0 0 0-7 7z"/></svg>
+                    <span>Bogotá, Medellín, Cali - Colombia</span>
+                </div>
+                <div class="contacto-item">
+                    <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44-2.83 3.76-5.14 6.59-6.59l2.7-2.7-.7-.71-1.41 1.41-2.7 2.7c-1.45 2.83-3.76 5.14-6.59 6.59l-2.7 2.7.7.71 1.41-1.41zM5.93 14.36l2.7-2.7c1.45-2.83 3.76-5.14 6.59-6.59l2.7 2.7-.71.7-1.41-1.41-2.7-2.7c-2.83-1.45-5.14-3.76-6.59-6.59l-2.7 2.7.71.7 1.41 1.41z"/></svg>
+                    <span>info@elitemotors.com.co</span>
+                </div>
+                <div class="contacto-item">
+                    <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44-2.83 3.76-5.14 6.59-6.59l2.7-2.7-.7-.71-1.41 1.41-2.7 2.7c-1.45 2.83-3.76 5.14-6.59 6.59l-2.7 2.7.7.71 1.41-1.41zM5.93 14.36l2.7-2.7c1.45-2.83 3.76-5.14 6.59-6.59l2.7 2.7-.71.7-1.41-1.41-2.7-2.7c-2.83-1.45-5.14-3.76-6.59-6.59l-2.7 2.7.71.7 1.41 1.41z"/></svg>
+                    <span>+57 300 123 4567</span>
+                </div>
+            </div>
+            <div class="form-contacto">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre completo">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" id="email" name="email" required placeholder="correo@ejemplo.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="ciudad">Ciudad</label>
+                        <select id="ciudad" name="ciudad">
+                            <option value="bogota">Bogotá</option>
+                            <option value="medellin">Medellín</option>
+                            <option value="cali">Cali</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="mensaje">Mensaje</label>
+                        <textarea id="mensaje" name="mensaje" rows="5" required placeholder="Cuéntanos sobre tu proyecto de personalización"></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Enviar Mensaje</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>Elite <span style="color: var(--rojo)">Motors</span></h3>
+                <p>Personalización automotriz exclusiva, innovadora y de alta calidad en Colombia.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Enlaces Rápidos</h4>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#mision-vision">Misión y Visión</a></li>
+                    <li><a href="#objetivo">Objetivo</a></li>
+                    <li><a href="#valores">Valores</a></li>
+                    <li><a href="#ciudades">Ciudades</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Servicios</h4>
+                <ul>
+                    <li><a href="#">Personalización Exterior</a></li>
+                    <li><a href="#">Personalización Interior</a></li>
+                    <li><a href="#">Tecnología Automotriz</a></li>
+                    <li><a href="#">Asesoría Personalizada</a></li>
+                    <li><a href="#">Mantenimiento</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Elite Motors S.A.S. Todos los derechos reservados. Empresa nacional con presencia en Bogotá, Medellín y Cali.
+        </div>
+    </footer>
+
+    <script>
+        // Menú móvil
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Cerrar menú al hacer clic en un enlace
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Efecto de scroll en el header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.padding = '1rem 5%';
+                header.style.background = 'rgba(26, 26, 26, 0.98)';
+            } else {
+                header.style.padding = '1.5rem 5%';
+                header.style.background = 'rgba(26, 26, 26, 0.95)';
+            }
+        });
+
+        // Manejo del formulario de contacto
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const nombre = document.getElementById('nombre').value;
+            const email = document.getElementById('email').value;
+            const ciudad = document.getElementById('ciudad').value;
+            const mensaje = document.getElementById('mensaje').value;
+
+            alert(`Gracias ${nombre} por tu mensaje. Te contactaremos pronto a ${email} desde nuestra sede en ${ciudad}.`);
+            contactForm.reset();
+        });
+
+        // Intersección Observer para animaciones al hacer scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.mv-card, .valor-card, .ciudad-card, .objetivo-container').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
